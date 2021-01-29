@@ -1,6 +1,8 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useRouteMatch } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+import ExternalRedirect from 'components/externalRedirect';
 
 import WORKSHOPS from 'workshops';
 import { filtered } from 'utils/Redirects';
@@ -14,22 +16,40 @@ function Workshop({ semester, dateString }) {
   const semesterData = WORKSHOPS[semester];
   const workshopData = WORKSHOPS[semester].workshops[dateString];
 
+  const fullWorkshopMatch = useRouteMatch({
+    path: `/workshops/${semester}/${dateString}`
+  });
+
+  const redirectRequestMatch = useRouteMatch({
+    path: `/workshops/${semester}/${dateString}/:dataName`
+  });
+
+  if (redirectRequestMatch && workshopData.redirects.includes(redirectRequestMatch.params.dataName) && workshopData[redirectRequestMatch.params.dataName]) {
+    return <ExternalRedirect target={`https://${workshopData[redirectRequestMatch.params.dataName]}`} />;
+  }
+
   return (
     <div className="w-full h-full flex flex-col p-2 items-center">
-      <Link to={`/workshops/${semester}`} className="self-start p-2 flex flex-row items-center rounded-md border border-yellow-300 text-black hover:bg-yellow-300 outline-none">
+      { !!fullWorkshopMatch && <Link to={`/workshops/${semester}`} className="self-start p-2 flex flex-row items-center rounded-md border border-yellow-300 text-black hover:bg-yellow-300 outline-none">
         <div className="">
           <FontAwesomeIcon icon="chevron-left" />
         </div>
         <p className="ml-2">
           Back to {semesterData.longName}
         </p>
-      </Link>
-      <h1 className="text-6xl font-bold text-center text-yellow-400 mb-3">{`${workshopData.title} (${workshopData.date})`}</h1>
+      </Link> }
+      <h1 className={`${fullWorkshopMatch ? "text-6xl" : "text-3xl"} font-bold text-center text-yellow-400 mb-3`}>{`${workshopData.title} (${workshopData.date})`}</h1>
       <div className="w-full h-fit flex flex-row flex-wrap p-2 justify-around">
-        { workshopData.flyer && <img src={require(`assets/images/flyers/${workshopData.flyer}.png`).default} alt="workshop flyer" className="w-11/12 md:w-5/12 object-contain object-bottom"/> }
+        { workshopData.flyer && (
+          !!fullWorkshopMatch
+            ? <img src={require(`assets/images/flyers/${workshopData.flyer}.png`).default} alt="workshop flyer" className="w-11/12 md:w-5/12 object-contain object-bottom"/>
+            : <Link key={dateString} to={`/workshops/${semester}/${dateString}`} className="w-11/12 md:w-5/12">
+                <img src={require(`assets/images/flyers/${workshopData.flyer}.png`).default} alt="workshop flyer" className="w-full h-full object-contain object-bottom"/>
+              </Link>
+        )}
         <div className="w-11/12 md:w-1/2 h-full p-3 flex flex-col justify-between">
-          { workshopData.description && <p className="text-lg">{workshopData.description}</p> }
-          { workshopData.software && workshopData.software.length && <div className="flex flex-col">
+          { !!workshopData.description && <p className="text-lg">{workshopData.description}</p> }
+          { !!workshopData.software && !!workshopData.software.length && <div className="flex flex-col">
             <p className="text-lg font-bold">Downloads:</p>
             <ul className="flex flex-col">
               {workshopData.software.map(softwareLinkName => {
@@ -46,7 +66,7 @@ function Workshop({ semester, dateString }) {
               })}
             </ul>
           </div> }
-          { workshopData.concepts && workshopData.concepts.length && <div className="flex flex-col">
+          { !!workshopData.concepts && !!workshopData.concepts.length && <div className="flex flex-col">
             <p className="text-lg font-bold">Concepts/Tags:</p>
             <ul className="flex flex-row flex-wrap w-fit">
               {workshopData.concepts.map(concept => {
@@ -56,16 +76,22 @@ function Workshop({ semester, dateString }) {
               })}
             </ul>
           </div> }
-          { workshopData.slides && <div className="">
+          { !!workshopData.slides && <div className="">
             <Link to={{ pathname: `https://${workshopData.slides}` }} target="_blank" className="underline flex flex-row items-center">
               <p className="text-lg font-bold mr-2">Slides</p>
               <FontAwesomeIcon icon={farFilePowerPoint} size="lg" />
             </Link>
           </div> }
-          { workshopData.video && <div className="">
+          { !!workshopData.video && <div className="">
             <Link to={{ pathname: `https://${workshopData.video}` }} target="_blank" className="underline flex flex-row items-center">
               <p className="text-lg font-bold mr-2">Recording</p>
               <FontAwesomeIcon icon={fabYoutube} size="lg" />
+            </Link>
+          </div> }
+          { !!workshopData.code && <div className="">
+            <Link to={{ pathname: `https://${workshopData.code}` }} target="_blank" className="underline flex flex-row items-center">
+              <p className="text-lg font-bold mr-2">Code</p>
+              <FontAwesomeIcon icon="code" size="lg" />
             </Link>
           </div> }
           <div className="flex-grow-0.5" />

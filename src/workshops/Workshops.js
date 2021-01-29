@@ -8,6 +8,8 @@
  concepts: ["tags"],
  slides: "box link",
  video: "youtube link",
+ code: "github link"
+ redirects: ["key names that are URLS (slides, videos, code)"]
  flyer: "png name in assets/images/flyers/"
  */
 
@@ -23,7 +25,9 @@ const WORKSHOPS = {
         description: "Learn how to create your very own voice-controlled LED face mask!",
         concepts: ["Arduino", "Arduino Nano", "Arduino microphone", "LEDs", "NeoPixel", "NeoPixel Matrix", "Wearable Tech"],
         slides: "gatech.box.com/v/gtmakery1-26",
-        video: "",
+        video: "youtu.be/TJ0sRLvHopQ",
+        code: "github.com/gtmakery/Workshops/tree/master/2021-Spring/1-LED_Face_Mask",
+        redirects: ["slides", "video", "code"],
         flyer: "jan26"
       },
       feb2: {

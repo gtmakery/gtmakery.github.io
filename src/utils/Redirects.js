@@ -18,7 +18,7 @@ const REDIRECTS = {
   youtube: {
     aliases: ["videos"],
     longName: "YouTube",
-    path: "youtube.com/channel/UCzlfxJFgJsj0D2HhD94Mxsw/playlists",
+    path: "youtube.com/channel/UCzlfxJFgJsj0D2HhD94Mxsw/videos",
     social: true,
     media: true,
     showNav: true,
@@ -43,7 +43,7 @@ const REDIRECTS = {
   },
   slack: {
     longName: "Slack",
-    path: "the-makery.slack.com",
+    path: "the-makery.slack.com/signup",
     social: true,
     chat: true,
     icon: ["fab","slack"],
@@ -71,7 +71,19 @@ const REDIRECTS = {
   },
   inkscape: {
     longName: "Inkscape",
-    path: "inkscape.org/release/inkscape-1.0.2/",
+    path: "inkscape.org/release/inkscape-1.0.2",
+    software: true
+  },
+  tinkercad: {
+    aliases: ["tinker"],
+    longName: "TinkerCAD",
+    path: "tinkercad.com",
+    software: true
+  },
+  fusion360: {
+    aliases: ["fusion"],
+    longName: "Fusion 360",
+    path: "autodesk.com/education/edu-software/overview#",
     software: true
   }
 };
