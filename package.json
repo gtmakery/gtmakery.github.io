@@ -21,7 +21,7 @@
   "scripts": {
     "start": "concurrently --restart-tries 5 --names \"  CSS,REACT\" \"npm run watch:css\" \"react-scripts start\"",
     "build": "npm run build:css && react-scripts build",
-    "postbuild": "rmdir /S /Q docs && move bulid docs && copy docs\\index.html docs\\404.html",
+    "postbuild": "(if exist docs rmdir /S /Q docs) && move build docs && copy docs\\index.html docs\\404.html",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "build:css": "postcss src/assets/styles/tailwind.css -o src/assets/styles/index.css",

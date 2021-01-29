@@ -1,0 +1,15 @@
+{
+  "short_name": "The Makery",
+  "name": "The Makery",
+  "icons": [
+    {
+      "src": "makery-logo.png",
+      "type": "image/png",
+      "sizes": "264x294"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
