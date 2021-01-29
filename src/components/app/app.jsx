@@ -6,10 +6,11 @@ import { Helmet } from 'react-helmet';
 import AppHeader from './app-header';
 import AppFooter from './app-footer';
 
-import About from 'components/about';
 import Landing from 'components/landing';
-import Bluejeans from 'components/bluejeans';
-import Rentals from 'components/rentals';
+import Socials from 'components/socials';
+import Workshops from 'components/workshops';
+import ExternalRedirect from 'components/externalRedirect';
+import { REDIRECTS } from 'utils';
 
 
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -22,11 +23,10 @@ require('./hacks');
 
 
 export default function App(props) {
-
   return (
     <div className='h-full flex flex-col' id='app'>
       <Helmet>
-        <title>Mungus IRL</title>
+        <title>The Makery</title>
       </Helmet>
       <AppHeader />
       <main className='flex-grow z-10'>
@@ -34,14 +34,21 @@ export default function App(props) {
           <Route exact path={['/', '/landing']}>
             <Landing />
           </Route>
-          <Route path='/about'>
-            <About />
+          <Route path='/socials'>
+            <Socials />
           </Route>
-          <Route path='/bluejeans'>
-            <Bluejeans />
+          <Route path='/workshops'>
+            <Workshops />
           </Route>
-          <Route path={['/rental', '/rentals']}>
-            <Rentals />
+          {Object.entries(REDIRECTS).map(([shortName, data]) => {
+            const pathNames = [shortName].concat(data.aliases || []).map(path => '/'+path);
+            // console.log(pathNames);
+            return <Route key={shortName} path={pathNames}>
+              <ExternalRedirect target={`https://${data.path}`} />
+            </Route>;
+          })}
+          <Route path='/'>
+            <Redirect to='/' />
           </Route>
         </Switch>
       </main>

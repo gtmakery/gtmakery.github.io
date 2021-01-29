@@ -14,6 +14,9 @@ module.exports = {
       boxShadow: {
         focus: '0 0 0 3px rgba(66, 153, 225, 0.5)',
       },
+      flexGrow: {
+        '0.5': '0.5'
+      },
       height: {
         fill: '-webkit-fill-available',
         '124': '31rem'
@@ -67,7 +70,8 @@ module.exports = {
       },
       width: {
         fill: '-webkit-fill-available',
-        fit: 'fit-content'
+        fit: 'fit-content',
+        '124': '31rem',
       },
       zIndex: {
         '-10': '-10',

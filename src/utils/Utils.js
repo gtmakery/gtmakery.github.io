@@ -1,6 +1,4 @@
 import React from 'react';
-import axios from 'axios';
-import jwt_decode from 'jwt-decode';
 
 export function addArray(array, ...arrays) {
     let newArr = [...array];
@@ -80,26 +78,6 @@ export function upperFirstChar(string) {
 
 export function upperFirstCharOnly(string) {
     return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
-}
-
-export function setAuthToken(token) {
-  if (token) {
-    // Apply authorization token to every request if logged in
-    axios.defaults.headers.common['Authorization'] = token;
-  } else {
-    // Delete auth header
-    delete axios.defaults.headers.common['Authorization'];
-  }
-};
-
-export function checkValidAuthToken() {
-  if (localStorage.jwtToken) {
-    const token = localStorage.jwtToken;  // Set auth token header auth
-    const decoded = jwt_decode(token);  // Decode token and get user info and exp
-    const currentTime = Date.now() / 1000; // to get in milliseconds
-    return { token, decoded, authenticated: decoded.exp > currentTime };
-  }
-  return false;
 }
 
 export function isEmpty(obj) {

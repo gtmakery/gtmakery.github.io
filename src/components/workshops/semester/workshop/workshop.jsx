@@ -1,0 +1,78 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+import WORKSHOPS from 'workshops';
+import { filtered } from 'utils/Redirects';
+
+const softwareRedirects = filtered("software");
+
+const farFilePowerPoint = ["far", "file-powerpoint"];
+const fabYoutube = ["fab", "youtube"];
+
+function Workshop({ semester, dateString }) {
+  const semesterData = WORKSHOPS[semester];
+  const workshopData = WORKSHOPS[semester].workshops[dateString];
+
+  return (
+    <div className="w-full h-full flex flex-col p-2 items-center">
+      <Link to={`/workshops/${semester}`} className="self-start p-2 flex flex-row items-center rounded-md border border-yellow-300 text-black hover:bg-yellow-300 outline-none">
+        <div className="">
+          <FontAwesomeIcon icon="chevron-left" />
+        </div>
+        <p className="ml-2">
+          Back to {semesterData.longName}
+        </p>
+      </Link>
+      <h1 className="text-6xl font-bold text-center text-yellow-400 mb-3">{`${workshopData.title} (${workshopData.date})`}</h1>
+      <div className="w-full h-fit flex flex-row flex-wrap p-2 justify-between">
+        <img src={require(`assets/images/flyers/${workshopData.flyer}.png`).default} alt="workshop flyer" className="w-11/12 md:w-5/12 object-contain object-bottom"/>
+        <div className="h-full p-3 flex flex-col justify-between">
+          <p className="text-lg">{workshopData.description}</p>
+          { workshopData.software && workshopData.software.length && <div className="flex flex-col">
+            <p className="text-lg font-bold">Downloads:</p>
+            <ul className="flex flex-col">
+              {workshopData.software.map(softwareLinkName => {
+                const softwareLinkData = softwareRedirects[softwareLinkName];
+                if (!softwareLinkData) {
+                  return <p className="text-red-500">oops! contact gtmakery@gmail.com to fix this</p>
+                }
+                return <li key={softwareLinkName} className={`${softwareLinkData.color} text-base`}>
+                  <Link to={{ pathname: `https://${softwareLinkData.path}` }} target="_blank" className="underline flex flex-row items-center">
+                    <FontAwesomeIcon icon={softwareLinkData.icon} size="lg" />
+                    <p>{softwareLinkData.longName}</p>
+                  </Link>
+                </li>
+              })}
+            </ul>
+          </div> }
+          <div className="flex flex-col">
+            <p className="text-lg font-bold">Concepts/Tags:</p>
+            <ul className="flex flex-row flex-wrap">
+              {workshopData.concepts.map(concept => {
+                return <li key={concept} className={`w-fit p-1 px-2 m-1 rounded-full border border-yellow-300 text-black`}>
+                  <p>{concept}</p>
+                </li>
+              })}
+            </ul>
+          </div>
+          <div className="">
+            <Link to={{ pathname: `https://${workshopData.slides}` }} target="_blank" className="underline flex flex-row items-center">
+              <p className="text-lg font-bold mr-2">Slides</p>
+              <FontAwesomeIcon icon={farFilePowerPoint} size="lg" />
+            </Link>
+          </div>
+          <div className="">
+            <Link to={{ pathname: `https://${workshopData.video}` }} target="_blank" className="underline flex flex-row items-center">
+              <p className="text-lg font-bold mr-2">Recording</p>
+              <FontAwesomeIcon icon={fabYoutube} size="lg" />
+            </Link>
+          </div>
+          <div className="flex-grow-0.5" />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Workshop;

@@ -1,28 +1,21 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
-const socials = {
-  "Mailing List": "tinyurl.com/gtmakerysurvey",
-  Discord: "discord.gg/mccRCsu",
-  Slack: "the-makery.slack.com",
-  Instagram: "instagram.com/gtmakery",
-  Facebook: "facebook.com/groups/2927249277306104/about/"
-}
+import Socials from 'components/socials';
+import SchedulePic from 'assets/images/spring21schedule.png';
 
 function Landing() {
   return (
-    <div className="w-full h-fill flex flex-col p-2">
-      <h1 className="text-lg text-center">The Makery!</h1>
-      <h3>Join our socials!</h3>
-      <ul>
-        {Object.entries(socials).map(([text, target]) => {
-          return <li>
-            {text}: <Link to={{ pathname: `https://${target}` }} target="_blank">
-              {target}
-            </Link>
-          </li>
-        })}
-      </ul>
+    <div className="w-full h-full flex flex-col p-2 items-center">
+      <h1 className="text-6xl font-bold text-center text-yellow-400 mb-3">The Makery!</h1>
+      <div className="container flex flex-col items-center text-lg">
+        <p className="">The Makery is a Georgia Tech student organization dedicated to embedded systems. We teach all things from basic Ardiuno concepts to Raspberry Pi web hosting and even 3D-printing/laser-cutting!</p>
+        <p className="">Our mission is to enable individuals to prototype, build, and program their own electronic devices, be it as simple as a flashing LED sign or as complicated as a solar powered surveillance blimp. We provide support for aspiring makers to develop ideas by providing the necessary knowledge and equipment.</p>
+      </div>
+      <div className="w-full flex flex-col items-center">
+        <h2 className="text-4xl font-bold text-center text-black mb-3">Schedule</h2>
+        <img src={SchedulePic} className="w-124" alt="schedule" />
+      </div>
+      <Socials />
     </div>
   );
 };
