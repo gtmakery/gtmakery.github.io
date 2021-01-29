@@ -4,9 +4,7 @@ import Socials from 'components/socials';
 import Workshop from 'components/workshops/semester/workshop';
 import SchedulePic from 'assets/images/spring21schedule.png';
 
-import WORKSHOPS from 'workshops';
-
-const latestWorkshop = Object.values(Object.values(WORKSHOPS)[0].workshops).slice(-1)[0];
+import { latestWorkshop } from 'workshops';
 
 function Landing() {
   return (

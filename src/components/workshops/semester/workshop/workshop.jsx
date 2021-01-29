@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import ExternalRedirect from 'components/externalRedirect';
 
-import WORKSHOPS from 'workshops';
+import WORKSHOPS, { latestWorkshop } from 'workshops';
 import { filtered } from 'utils/Redirects';
 
 const softwareRedirects = filtered("software");
@@ -15,6 +15,7 @@ const fabYoutube = ["fab", "youtube"];
 function Workshop({ semester, dateString }) {
   const semesterData = WORKSHOPS[semester];
   const workshopData = WORKSHOPS[semester].workshops[dateString];
+  const isLatest = latestWorkshop === workshopData;
 
   const fullWorkshopMatch = useRouteMatch({
     path: `/workshops/${semester}/${dateString}`
@@ -49,6 +50,11 @@ function Workshop({ semester, dateString }) {
         )}
         <div className="w-11/12 md:w-1/2 h-full p-3 flex flex-col justify-between">
           { !!workshopData.description && <p className="text-lg">{workshopData.description}</p> }
+          { isLatest && workshopData.hasRental && <div className="">
+            <Link to={{ pathname: `/rentals` }} target="_blank" className="underline flex flex-row items-center">
+              <p className="text-lg font-bold mr-2">Rentals</p>
+            </Link>
+          </div> }
           { !!workshopData.software && !!workshopData.software.length && <div className="flex flex-col">
             <p className="text-lg font-bold">Downloads:</p>
             <ul className="flex flex-col">

@@ -40,11 +40,16 @@ const WORKSHOPS = {
         concepts: ["Arduino", "LEDs", "Laser Cutting", "Inkscape", "Gifts"],
         slides: "gatech.box.com/v/gtmakery2-2",
         video: "",
-        flyer: "feb2"
+        code: "",
+        redirects: ["slides", "video", "code"],
+        flyer: "feb2",
+        hasRental: true
       }
     }
   }
 };
+
+const latestWorkshop = Object.values(Object.values(WORKSHOPS)[0].workshops).slice(-1)[0];
 
 const byAlias = (alias) => {
   return Object.values(WORKSHOPS).map(semester => semester.workshops).reduce((allWorkshops, workshopSetObject) => allWorkshops.concat(Object.values(workshopSetObject)), []).find(workshop =>
@@ -58,4 +63,4 @@ const byAlias = (alias) => {
 }
 
 export default WORKSHOPS;
-export { byAlias };
+export { latestWorkshop, byAlias };
