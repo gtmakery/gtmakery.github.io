@@ -25,10 +25,10 @@ function Workshop({ semester, dateString }) {
         </p>
       </Link>
       <h1 className="text-6xl font-bold text-center text-yellow-400 mb-3">{`${workshopData.title} (${workshopData.date})`}</h1>
-      <div className="w-full h-fit flex flex-row flex-wrap p-2 justify-between">
-        <img src={require(`assets/images/flyers/${workshopData.flyer}.png`).default} alt="workshop flyer" className="w-11/12 md:w-5/12 object-contain object-bottom"/>
-        <div className="h-full p-3 flex flex-col justify-between">
-          <p className="text-lg">{workshopData.description}</p>
+      <div className="w-full h-fit flex flex-row flex-wrap p-2 justify-around">
+        { workshopData.flyer && <img src={require(`assets/images/flyers/${workshopData.flyer}.png`).default} alt="workshop flyer" className="w-11/12 md:w-5/12 object-contain object-bottom"/> }
+        <div className="w-11/12 md:w-1/2 h-full p-3 flex flex-col justify-between">
+          { workshopData.description && <p className="text-lg">{workshopData.description}</p> }
           { workshopData.software && workshopData.software.length && <div className="flex flex-col">
             <p className="text-lg font-bold">Downloads:</p>
             <ul className="flex flex-col">
@@ -38,7 +38,7 @@ function Workshop({ semester, dateString }) {
                   return <p className="text-red-500">oops! contact gtmakery@gmail.com to fix this</p>
                 }
                 return <li key={softwareLinkName} className={`${softwareLinkData.color} text-base`}>
-                  <Link to={{ pathname: `https://${softwareLinkData.path}` }} target="_blank" className="underline flex flex-row items-center">
+                  <Link to={{ pathname: `https://${softwareLinkData.path}` }} target="_blank" className="underline flex flex-row items-center w-fit">
                     <FontAwesomeIcon icon={softwareLinkData.icon} size="lg" />
                     <p>{softwareLinkData.longName}</p>
                   </Link>
@@ -46,28 +46,28 @@ function Workshop({ semester, dateString }) {
               })}
             </ul>
           </div> }
-          <div className="flex flex-col">
+          { workshopData.concepts && workshopData.concepts.length && <div className="flex flex-col">
             <p className="text-lg font-bold">Concepts/Tags:</p>
-            <ul className="flex flex-row flex-wrap">
+            <ul className="flex flex-row flex-wrap w-fit">
               {workshopData.concepts.map(concept => {
                 return <li key={concept} className={`w-fit p-1 px-2 m-1 rounded-full border border-yellow-300 text-black`}>
                   <p>{concept}</p>
                 </li>
               })}
             </ul>
-          </div>
-          <div className="">
+          </div> }
+          { workshopData.slides && <div className="">
             <Link to={{ pathname: `https://${workshopData.slides}` }} target="_blank" className="underline flex flex-row items-center">
               <p className="text-lg font-bold mr-2">Slides</p>
               <FontAwesomeIcon icon={farFilePowerPoint} size="lg" />
             </Link>
-          </div>
-          <div className="">
+          </div> }
+          { workshopData.video && <div className="">
             <Link to={{ pathname: `https://${workshopData.video}` }} target="_blank" className="underline flex flex-row items-center">
               <p className="text-lg font-bold mr-2">Recording</p>
               <FontAwesomeIcon icon={fabYoutube} size="lg" />
             </Link>
-          </div>
+          </div> }
           <div className="flex-grow-0.5" />
         </div>
       </div>

@@ -32,7 +32,7 @@ function Semester({ semester }) {
             Back to all workshops
           </p>
         </Link> }
-        <div className="w-full h-fill flex flex-row flex-wrap items-center justify-evenly content-around">
+        <div className="w-full h-fill flex flex-row flex-wrap justify-evenly">
           {Object.entries(WORKSHOPS[semester].workshops).map(([dateString, data]) => {
             /* Extremely hacky code below
              * require(`assets/images/flyers/${data.flyer}.png`).default

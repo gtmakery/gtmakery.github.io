@@ -34,7 +34,7 @@ const WORKSHOPS = {
         description: "Learn how to laser cut a custom design and make it glow with LEDs!",
         software: ["inkscape"],
         concepts: ["Arduino", "LEDs", "Laser Cutting", "Inkscape", "Gifts"],
-        slides: "gatech.box.com/v/gtmakery1-26",
+        slides: "gatech.box.com/v/gtmakery2-2",
         video: "",
         flyer: "feb2"
       }

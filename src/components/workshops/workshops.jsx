@@ -23,7 +23,7 @@ function Workshops() {
       : <div className="w-full h-full flex flex-col p-2 items-center">
         {Object.entries(WORKSHOPS).map(([semester, data]) => {
           return (
-            <div className="flex flex-col items-center my-4 first:mt-0 last:mb-0" key={semester}>
+            <div className="w-full flex flex-col items-center my-4 first:mt-0 last:mb-0" key={semester}>
               <Link to={`/workshops/${semester}`} className="mb-2">
                 <p className="text-2xl font-semibold">{data.longName}</p>
               </Link>
