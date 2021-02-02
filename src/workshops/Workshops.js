@@ -9,6 +9,7 @@
  slides: "box link",
  video: "youtube link",
  code: "github link"
+ files: "box folder link"
  redirects: ["key names that are URLS (slides, videos, code)"]
  flyer: "png name in assets/images/flyers/"
  */
@@ -38,10 +39,11 @@ const WORKSHOPS = {
         description: "Learn how to laser cut a custom design and make it glow with LEDs!",
         software: ["inkscape"],
         concepts: ["Arduino", "LEDs", "Laser Cutting", "Inkscape", "Gifts"],
-        slides: "gatech.box.com/v/gtmakery2-2",
+        slides: "gatech.box.com/v/gtmakery2-02",
         video: "",
-        code: "",
-        redirects: ["slides", "video", "code"],
+        code: "github.com/gtmakery/Workshops/tree/master/2021-Spring/2-Valentines_Acrylic_LED_Display",
+        files: "gatech.box.com/v/gtmakery2-2files",
+        redirects: ["slides", "video", "code", "files"],
         flyer: "feb2",
         hasRental: true
       }
@@ -56,11 +58,31 @@ const byAlias = (alias) => {
     alias === workshop.semester + workshop.dateString
         || alias === workshop.dateString
         || alias === workshop.date
-        || alias === workshop.title
+        || alias.toLowerCase() === workshop.title.toLowerCase()
         || alias.toLowerCase() === workshop.title.replace(/ /g,"-").toLowerCase()
+        || alias.toLowerCase() === workshop.title.replace(/ /g,"").toLowerCase()
         || (workshop.aliases && workshop.aliases.find(workshopAlias => workshopAlias.toLowerCase() === alias.toLowerCase()))
   );
 }
 
+const redirectionDataMapping = {
+  slides: {
+    title: "Slides",
+    icon: ["far", "file-powerpoint"]
+  },
+  video: {
+    title: "Video",
+    icon: ["fab", "youtube"]
+  },
+  code: {
+    title: "Code",
+    icon: "code"
+  },
+  files: {
+    title: "Files",
+    icon: ["far", "folder-open"]
+  }
+}
+
 export default WORKSHOPS;
-export { latestWorkshop, byAlias };
+export { latestWorkshop, byAlias, redirectionDataMapping };

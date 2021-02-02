@@ -4,13 +4,15 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import ExternalRedirect from 'components/externalRedirect';
 
-import WORKSHOPS, { latestWorkshop } from 'workshops';
+import WORKSHOPS, { latestWorkshop, redirectionDataMapping } from 'workshops';
 import { filtered } from 'utils/Redirects';
+import { upperFirstChar } from 'utils';
 
 const softwareRedirects = filtered("software");
 
-const farFilePowerPoint = ["far", "file-powerpoint"];
-const fabYoutube = ["fab", "youtube"];
+// const farFilePowerPoint = ["far", "file-powerpoint"];
+// const fabYoutube = ["fab", "youtube"];
+// const farFolderOpen = ["far", "folder-open"];
 
 function Workshop({ semester, dateString }) {
   const semesterData = WORKSHOPS[semester];
@@ -28,9 +30,9 @@ function Workshop({ semester, dateString }) {
   if (redirectRequestMatch && workshopData.redirects.includes(redirectRequestMatch.params.dataName) && workshopData[redirectRequestMatch.params.dataName]) {
     return <ExternalRedirect target={`https://${workshopData[redirectRequestMatch.params.dataName]}`} />;
   }
-
+//TODO fix the h-flil garbage
   return (
-    <div className="w-full h-full flex flex-col p-2 items-center">
+    <div className={`container ${!!fullWorkshopMatch ? "h-fill" : ""} flex flex-col p-2 items-center`}>
       { !!fullWorkshopMatch && <Link to={`/workshops/${semester}`} className="self-start p-2 flex flex-row items-center rounded-md border border-yellow-300 text-black hover:bg-yellow-300 outline-none">
         <div className="">
           <FontAwesomeIcon icon="chevron-left" />
@@ -43,9 +45,9 @@ function Workshop({ semester, dateString }) {
       <div className="w-full h-fit flex flex-row flex-wrap p-2 justify-around">
         { workshopData.flyer && (
           !!fullWorkshopMatch
-            ? <img src={require(`assets/images/flyers/${workshopData.flyer}.png`).default} alt="workshop flyer" className="w-11/12 md:w-5/12 object-contain object-bottom"/>
+            ? <img src={require(`assets/images/flyers/${workshopData.flyer}.png`).default} alt="workshop flyer" className="w-11/12 md:w-5/12 max-h-90vh object-contain object-bottom"/>
             : <Link key={dateString} to={`/workshops/${semester}/${dateString}`} className="w-11/12 md:w-5/12">
-                <img src={require(`assets/images/flyers/${workshopData.flyer}.png`).default} alt="workshop flyer" className="w-full h-full object-contain object-bottom"/>
+                <img src={require(`assets/images/flyers/${workshopData.flyer}.png`).default} alt="workshop flyer" className="w-full h-full max-h-90vh object-contain object-bottom"/>
               </Link>
         )}
         <div className="w-11/12 md:w-1/2 h-full p-3 flex flex-col justify-between">
@@ -82,24 +84,16 @@ function Workshop({ semester, dateString }) {
               })}
             </ul>
           </div> }
-          { !!workshopData.slides && <div className="">
-            <Link to={{ pathname: `https://${workshopData.slides}` }} target="_blank" className="underline flex flex-row items-center">
-              <p className="text-lg font-bold mr-2">Slides</p>
-              <FontAwesomeIcon icon={farFilePowerPoint} size="lg" />
-            </Link>
-          </div> }
-          { !!workshopData.video && <div className="">
-            <Link to={{ pathname: `https://${workshopData.video}` }} target="_blank" className="underline flex flex-row items-center">
-              <p className="text-lg font-bold mr-2">Recording</p>
-              <FontAwesomeIcon icon={fabYoutube} size="lg" />
-            </Link>
-          </div> }
-          { !!workshopData.code && <div className="">
-            <Link to={{ pathname: `https://${workshopData.code}` }} target="_blank" className="underline flex flex-row items-center">
-              <p className="text-lg font-bold mr-2">Code</p>
-              <FontAwesomeIcon icon="code" size="lg" />
-            </Link>
-          </div> }
+          { !!workshopData.redirects && workshopData.redirects.filter(redirKey => workshopData[redirKey]).map(redirKey => {
+            return <div className="">
+              <Link to={{ pathname: `https://${workshopData[redirKey]}` }} target="_blank" className="underline flex flex-row items-center">
+                <p className="text-lg font-bold mr-2">{ redirectionDataMapping[redirKey].title || upperFirstChar(redirKey) }</p>
+                { redirectionDataMapping[redirKey] && redirectionDataMapping[redirKey].icon &&
+                  <FontAwesomeIcon icon={redirectionDataMapping[redirKey].icon} size="lg" />
+                }
+              </Link>
+            </div>
+          })}
           <div className="flex-grow-0.5" />
         </div>
       </div>

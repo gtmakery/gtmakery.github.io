@@ -50,7 +50,8 @@ module.exports = {
       maxHeight: {
         '1/2': '50%',
         '124': '31rem',
-        'fit-borders': 'calc(100vh - 120px)'
+        'fit-borders': 'calc(100vh - 120px)',
+        '90vh': '90vh'
       },
       maxWidth: {
         '1/2': '50%'

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useRouteMatch  } from 'react-router-dom';
+import { Link, Redirect, useRouteMatch  } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import Workshop from './workshop';
@@ -15,15 +15,17 @@ function Semester({ semester }) {
   });
 
   const selectedWorkshop = fullSemesterDateMatch && byAlias(fullSemesterDateMatch.params.dateString);
-  if (selectedWorkshop) {
-    return <Workshop semester={selectedWorkshop.semester} dateString={selectedWorkshop.dateString} />
-    // return <Redirect to={`/workshops/${selectedWorkshop.semester}/${selectedWorkshop.dateString}`} />
+  if (selectedWorkshop && fullSemesterDateMatch.params.dateString !== selectedWorkshop.dateString) {
+    // console.log(fullSemesterDateMatch);
+    // console.log(`/workshops/${selectedWorkshop.semester}/${selectedWorkshop.dateString}${window.location.pathname.substring(fullSemesterDateMatch.url.length)}`);
+    // return <Workshop semester={selectedWorkshop.semester} dateString={selectedWorkshop.dateString} />
+    return <Redirect to={`/workshops/${selectedWorkshop.semester}/${selectedWorkshop.dateString}${window.location.pathname.substring(fullSemesterDateMatch.url.length)}`} />
   }
 
   return (
     fullSemesterDateMatch && Object.keys(WORKSHOPS[semester].workshops).includes(fullSemesterDateMatch.params.dateString)
       ? <Workshop semester={semester} dateString={fullSemesterDateMatch.params.dateString} />
-      : <div className="w-full h-full flex flex-col p-2 items-center">
+      : <div className="w-full h-fill flex flex-col p-2 items-center">
         { semesterMatch && <Link to={`/workshops`} className="self-start p-2 flex flex-row items-center rounded-md border border-yellow-300 text-black hover:bg-yellow-300 outline-none">
           <div className="">
             <FontAwesomeIcon icon="chevron-left" />
