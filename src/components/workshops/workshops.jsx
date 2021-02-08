@@ -4,7 +4,7 @@ import { Link, Redirect, useRouteMatch  } from 'react-router-dom';
 import Semester from './semester';
 // import Workshop from './semester/workshop';
 
-import WORKSHOPS, { byAlias } from 'workshops';
+import WORKSHOPS, { byAlias } from 'clubData/workshops';
 
 function Workshops() {
   let match = useRouteMatch({

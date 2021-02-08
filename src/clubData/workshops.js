@@ -2,7 +2,8 @@
  semester: "reverse mapping"
  dateString: "reverse mapping"
  date: "m/dd",
- title: ""
+ fullDate: new Date(year, mm-1, dd),    //month is 0 indexed
+ title: "",
  desciption: "",
  links: ["keys in REDIRECT"],
  concepts: ["tags"],
@@ -13,7 +14,6 @@
  redirects: ["key names that are URLS (slides, videos, code)"]
  flyer: "png name in assets/images/flyers/"
  */
-
 const WORKSHOPS = {
   spring21: {
     longName: "Spring 2021",
@@ -22,6 +22,7 @@ const WORKSHOPS = {
         semester: "spring21",
         dateString: "jan26",
         date: "1/26",
+        fullDate: new Date(2021, 0, 26),
         title: "LED Face Mask",
         description: "Learn how to create your very own voice-controlled LED face mask!",
         concepts: ["Arduino", "Arduino Nano", "Arduino microphone", "LEDs", "NeoPixel", "NeoPixel Matrix", "Wearable Tech"],
@@ -35,6 +36,7 @@ const WORKSHOPS = {
         semester: "spring21",
         dateString: "feb2",
         date: "2/2",
+        fullDate: new Date(2021, 1, 2),
         title: "Valentine's Day",
         description: "Learn how to laser cut a custom design and make it glow with LEDs!",
         software: ["inkscape"],
@@ -51,7 +53,7 @@ const WORKSHOPS = {
   }
 };
 
-const latestWorkshop = Object.values(Object.values(WORKSHOPS)[0].workshops).slice(-1)[0];
+const latestWorkshop = Object.values(Object.values(WORKSHOPS).slice(-1)[0].workshops).slice(-1)[0];
 
 const byAlias = (alias) => {
   return Object.values(WORKSHOPS).map(semester => semester.workshops).reduce((allWorkshops, workshopSetObject) => allWorkshops.concat(Object.values(workshopSetObject)), []).find(workshop =>
@@ -63,26 +65,7 @@ const byAlias = (alias) => {
         || alias.toLowerCase() === workshop.title.replace(/ /g,"").toLowerCase()
         || (workshop.aliases && workshop.aliases.find(workshopAlias => workshopAlias.toLowerCase() === alias.toLowerCase()))
   );
-}
-
-const redirectionDataMapping = {
-  slides: {
-    title: "Slides",
-    icon: ["far", "file-powerpoint"]
-  },
-  video: {
-    title: "Video",
-    icon: ["fab", "youtube"]
-  },
-  code: {
-    title: "Code",
-    icon: "code"
-  },
-  files: {
-    title: "Files",
-    icon: ["far", "folder-open"]
-  }
-}
+};
 
 export default WORKSHOPS;
-export { latestWorkshop, byAlias, redirectionDataMapping };
+export { latestWorkshop, byAlias };

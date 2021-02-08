@@ -39,6 +39,9 @@ export default function NavBar(props) {
           <Link to="/workshops" className="block mt-4 mb-4 md:mb-0 md:inline-block md:mt-0 text-white hover:text-yellow-400 mr-4">
             Workshops
           </Link>
+          <Link to="/projects" className="block mt-4 mb-4 md:mb-0 md:inline-block md:mt-0 text-white hover:text-yellow-400 mr-4">
+            Projects
+          </Link>
           {Object.entries(navItems).map(([shortName, data]) => {
             return <Link key={shortName} to={`/${shortName}`} className="block mt-4 mb-4 md:mb-0 md:inline-block md:mt-0 text-white hover:text-yellow-400 mr-4">
               {data.longName}

@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import Workshop from './workshop';
 
-import WORKSHOPS, { byAlias } from 'workshops';
+import WORKSHOPS, { byAlias } from 'clubData/workshops';
 
 function Semester({ semester }) {
   let semesterMatch = useRouteMatch({
@@ -41,7 +41,7 @@ function Semester({ semester }) {
              */
             return (
               <Link key={dateString} to={`/workshops/${semester}/${dateString}`} className="flex flex-col items-center">
-                <img src={require(`assets/images/flyers/${data.flyer}.png`).default} alt="workshop flyer" className="w-48 h-72 object-contain object-bottom"/>
+                { data.flyer && <img src={require(`assets/images/flyers/${data.flyer}.png`).default} alt="projectMeeting flyer" className="w-48 h-72 object-contain object-bottom" /> }
                 <p className="text-lg">{data.title}</p>
               </Link>
             );

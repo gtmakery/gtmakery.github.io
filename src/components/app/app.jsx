@@ -9,9 +9,11 @@ import AppFooter from './app-footer';
 import Landing from 'components/landing';
 import Socials from 'components/socials';
 import Workshops from 'components/workshops';
+import Projects from 'components/projects';
 import ExternalRedirect from 'components/externalRedirect';
 import { REDIRECTS } from 'utils';
 
+import { latestMeeting } from 'clubData';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
@@ -39,6 +41,12 @@ export default function App(props) {
           </Route>
           <Route path='/workshops'>
             <Workshops />
+          </Route>
+          <Route path='/projects'>
+            <Projects />
+          </Route>
+          <Route path='/upcoming'>
+            <Redirect to={`${latestMeeting.type === "WORKSHOP" ? "workshops" : "projects"}/${latestMeeting.semester}/${latestMeeting.dateString}`} />
           </Route>
           {Object.entries(REDIRECTS).map(([shortName, data]) => {
             const pathNames = [shortName].concat(data.aliases || []).map(path => '/'+path);

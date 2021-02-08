@@ -4,20 +4,20 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import ExternalRedirect from 'components/externalRedirect';
 
-import WORKSHOPS, { latestWorkshop, redirectionDataMapping } from 'workshops';
+import WORKSHOPS, { latestWorkshop } from 'clubData/workshops';
+import { redirectionDataMapping } from 'clubData';
 import { filtered } from 'utils/Redirects';
 import { upperFirstChar } from 'utils';
 
 const softwareRedirects = filtered("software");
 
-// const farFilePowerPoint = ["far", "file-powerpoint"];
-// const fabYoutube = ["fab", "youtube"];
-// const farFolderOpen = ["far", "folder-open"];
-
 function Workshop({ semester, dateString }) {
   const semesterData = WORKSHOPS[semester];
   const workshopData = WORKSHOPS[semester].workshops[dateString];
   const isLatest = latestWorkshop === workshopData;
+  const dayAfter = new Date(workshopData.fullDate);
+  dayAfter.setDate(dayAfter.getDate() + 1);
+  dayAfter.setHours(0,0,0,0);
 
   const fullWorkshopMatch = useRouteMatch({
     path: `/workshops/${semester}/${dateString}`
@@ -27,7 +27,7 @@ function Workshop({ semester, dateString }) {
     path: `/workshops/${semester}/${dateString}/:dataName`
   });
 
-  if (redirectRequestMatch && workshopData.redirects.includes(redirectRequestMatch.params.dataName) && workshopData[redirectRequestMatch.params.dataName]) {
+  if (redirectRequestMatch && workshopData.redirects.includes(redirectRequestMatch.params.dataName) && workshopData[redirectRequestMatch.params.dataName] && workshopData[redirectRequestMatch.params.dataName].length) {
     return <ExternalRedirect target={`https://${workshopData[redirectRequestMatch.params.dataName]}`} />;
   }
 //TODO fix the h-flil garbage
@@ -52,7 +52,7 @@ function Workshop({ semester, dateString }) {
         )}
         <div className="w-11/12 md:w-1/2 h-full p-3 flex flex-col justify-between">
           { !!workshopData.description && <p className="text-lg">{workshopData.description}</p> }
-          { isLatest && workshopData.hasRental && <div className="">
+          { workshopData.hasRental && isLatest && Date.now() <= dayAfter.getTime() && <div className="">
             <Link to={{ pathname: `/rentals` }} target="_blank" className="underline flex flex-row items-center">
               <p className="text-lg font-bold mr-2">Rentals</p>
             </Link>
@@ -67,7 +67,7 @@ function Workshop({ semester, dateString }) {
                 }
                 return <li key={softwareLinkName} className={`${softwareLinkData.color} text-base`}>
                   <Link to={{ pathname: `https://${softwareLinkData.path}` }} target="_blank" className="underline flex flex-row items-center w-fit">
-                    <FontAwesomeIcon icon={softwareLinkData.icon} size="lg" />
+                    { !!softwareLinkData.icon && <FontAwesomeIcon icon={softwareLinkData.icon} size="lg" /> }
                     <p>{softwareLinkData.longName}</p>
                   </Link>
                 </li>

@@ -26,7 +26,7 @@ const REDIRECTS = {
     color: "text-red-500"
   },
   mailing: {
-    aliases: ["mailing-list"],
+    aliases: ["mailing-list", "interest"],
     longName: "Mailing List",
     path: "tinyurl.com/gtmakerysurvey2021",
     social: true,
