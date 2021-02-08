@@ -12,7 +12,7 @@ const mailingList = REDIRECTS.mailing;
 
 function Socials() {
   return (
-    <div className="w-full h-fill flex flex-col p-2 items-center">
+    <div className="w-full flex flex-col p-2 items-center">
       <div className="w-full flex flex-row justify-center items-center">
         <h1 className="text-4xl font-bold text-center mr-2">Get emails!</h1>
         <Link to={{ pathname: `https://${mailingList.path}` }} target="_blank" className={`${mailingList.color} underline mt-1.5`}>

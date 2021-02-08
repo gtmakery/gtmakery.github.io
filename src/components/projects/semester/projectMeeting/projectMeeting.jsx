@@ -32,7 +32,7 @@ function ProjectMeeting({ semester, dateString }) {
   }
 //TODO fix the h-flil garbage
   return (
-    <div className={`container ${!!fullProjectMeetingMatch ? "h-fill" : ""} flex flex-col p-2 items-center`}>
+    <div className={`container ${!!fullProjectMeetingMatch ? "h-fill" : ""} min-h-fit flex flex-col p-2 items-center`}>
       { !!fullProjectMeetingMatch && <Link to={`/projects/${semester}`} className="self-start p-2 flex flex-row items-center rounded-md border border-yellow-300 text-black hover:bg-yellow-300 outline-none">
         <div className="">
           <FontAwesomeIcon icon="chevron-left" />

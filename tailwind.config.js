@@ -18,6 +18,7 @@ module.exports = {
         '0.5': '0.5'
       },
       height: {
+        fit: 'fit-content',
         fill: '-webkit-fill-available',
         '124': '31rem'
       },

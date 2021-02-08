@@ -14,7 +14,7 @@ const SecondaryMeetingType = latestWorkshop !== latestMeeting ? Workshop : Proje
 
 function Landing() {
   return (
-    <div className="w-full h-fill flex flex-col p-2 items-center">
+    <div className="w-full h-fill min-h-fit flex flex-col p-2 items-center">
       <h1 className="text-6xl font-bold text-center text-yellow-400 mb-3">The Makery!</h1>
       <div className="container flex flex-col items-center text-lg">
         <p className="">The Makery is a Georgia Tech student organization dedicated to embedded systems. We teach all things from basic Ardiuno concepts to Raspberry Pi web hosting and even 3D-printing/laser-cutting!</p>

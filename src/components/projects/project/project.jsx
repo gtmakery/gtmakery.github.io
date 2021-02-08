@@ -30,7 +30,7 @@ function Project({ projectName }) {
   }
 //TODO fix the h-flil garbage
   return (
-    <div className={`container ${!!fullProjectMatch ? "h-fill" : ""} flex flex-col p-2 items-center mx-auto`}>
+    <div className={`container ${!!fullProjectMatch ? "h-fill" : ""} min-h-fit flex flex-col p-2 items-center mx-auto`}>
       { !!fullProjectMatch && <Link to={`/projects${returnToMeetingInfo ? `/${returnToMeetingInfo.semester}/${returnToMeetingInfo.dateString}` : ""}`} className="self-start p-2 flex flex-row items-center rounded-md border border-yellow-300 text-black hover:bg-yellow-300 outline-none">
         <div className="">
           <FontAwesomeIcon icon="chevron-left" />

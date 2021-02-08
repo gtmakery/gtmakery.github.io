@@ -32,7 +32,7 @@ function Workshop({ semester, dateString }) {
   }
 //TODO fix the h-flil garbage
   return (
-    <div className={`container ${!!fullWorkshopMatch ? "h-fill" : ""} flex flex-col p-2 items-center`}>
+    <div className={`container ${!!fullWorkshopMatch ? "h-fill" : ""} min-h-fit flex flex-col p-2 items-center`}>
       { !!fullWorkshopMatch && <Link to={`/workshops/${semester}`} className="self-start p-2 flex flex-row items-center rounded-md border border-yellow-300 text-black hover:bg-yellow-300 outline-none">
         <div className="">
           <FontAwesomeIcon icon="chevron-left" />
@@ -45,9 +45,9 @@ function Workshop({ semester, dateString }) {
       <div className="w-full h-fit flex flex-row flex-wrap p-2 justify-around">
         { workshopData.flyer && (
           !!fullWorkshopMatch
-            ? <img src={require(`assets/images/flyers/${workshopData.flyer}.png`).default} alt="workshop flyer" className="w-11/12 md:w-5/12 max-h-90vh object-contain object-bottom"/>
+            ? <img src={require(`assets/images/flyers/${workshopData.flyer}.png`).default} alt="workshop flyer" className="w-11/12 md:w-5/12 max-h-124 object-contain object-center"/>
             : <Link key={dateString} to={`/workshops/${semester}/${dateString}`} className="w-11/12 md:w-5/12">
-                <img src={require(`assets/images/flyers/${workshopData.flyer}.png`).default} alt="workshop flyer" className="w-full h-full max-h-90vh object-contain object-bottom"/>
+                <img src={require(`assets/images/flyers/${workshopData.flyer}.png`).default} alt="workshop flyer" className="w-full h-full max-h-124 object-contain object-center"/>
               </Link>
         )}
         <div className="w-11/12 md:w-1/2 h-full p-3 flex flex-col justify-between">
