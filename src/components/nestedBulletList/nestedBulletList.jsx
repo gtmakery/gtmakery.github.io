@@ -2,9 +2,9 @@ import React from 'react';
 
 
 const NestedBulletList = ({bullets}) => {
-  return (!bullets) ? (null) : <ul className="">
+  return (!bullets) ? (null) : <ul className="pl-3">
     { !!bullets && !!bullets.length && bullets.map(bullet => {
-      return <BulletItem item={bullet} />
+      return <BulletItem key={bullet} item={bullet} />
     })}
   </ul>
 };

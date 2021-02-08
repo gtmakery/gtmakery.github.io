@@ -26,7 +26,31 @@ const PROJECT_MEETINGS = {
         redirects: ["slides", "video", "files"],
         offLimits: ["slides"],
         mainProjectFocus: "",
-        preMeetingBlurb: "Hey everyone! We'd love for you to come up with some project ideas that we can discuss at the meeting.",
+        preMeetingBlurb: {
+          text: "Hey everyone! We'd love for you to come up with some project ideas that we can discuss at the meeting.",
+          bullets: [
+            {
+              text: "Some inspiration:",
+              bullets: [
+                "Build-your-own CNC mill/3-D Printer",
+                "Swarm robots (a bunch of small robots with one common goal)",
+                "Mini-Mars Rover (small car)",
+                "Smart watch"
+              ]
+            },
+            {
+              text: "Considerations:",
+              bullets: [
+                "Cool factor",
+                "Can it be a team effort (or is it more  of a solo project)?",
+                {
+                  text: "How interested are YOU and how interested are your teammates?",
+                  bullets: ["Tell us why you love your idea"]
+                }
+              ]
+            }
+          ]
+        },
         minutes: [
           "None yet!"
         ],

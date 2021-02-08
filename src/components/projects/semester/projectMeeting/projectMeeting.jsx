@@ -30,7 +30,7 @@ function ProjectMeeting({ semester, dateString }) {
   if (redirectRequestMatch && projectMeetingData.redirects.includes(redirectRequestMatch.params.dataName) && projectMeetingData[redirectRequestMatch.params.dataName] && projectMeetingData[redirectRequestMatch.params.dataName].length) {
     return <ExternalRedirect target={`https://${projectMeetingData[redirectRequestMatch.params.dataName]}`} />;
   }
-//TODO fix the h-flil garbage
+
   return (
     <div className={`container ${!!fullProjectMeetingMatch ? "h-fill" : ""} min-h-fit flex flex-col p-2 items-center`}>
       { !!fullProjectMeetingMatch && <Link to={`/projects/${semester}`} className="self-start p-2 flex flex-row items-center rounded-md border border-yellow-300 text-black hover:bg-yellow-300 outline-none">
@@ -66,7 +66,12 @@ function ProjectMeeting({ semester, dateString }) {
             </div>
           })}
           { !!projectMeetingData.minutes && !!projectMeetingData.minutes.length && (!isPast
-            ? <p className="text-xl">{projectMeetingData.preMeetingBlurb}</p>
+            ? (
+              !!projectMeetingData.preMeetingBlurb && <>
+                <p className="text-xl">{projectMeetingData.preMeetingBlurb.text || projectMeetingData.preMeetingBlurb}</p>
+                { projectMeetingData.preMeetingBlurb.bullets && <BulletList bullets={projectMeetingData.preMeetingBlurb.bullets} /> }
+              </>
+            )
             : <>
               <h2 className="text-2xl font-bold">Meeting Notes:</h2>
               <BulletList bullets={projectMeetingData.minutes} />
