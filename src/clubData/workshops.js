@@ -42,11 +42,27 @@ const WORKSHOPS = {
         software: ["inkscape"],
         concepts: ["Arduino", "LEDs", "Laser Cutting", "Inkscape", "Gifts"],
         slides: "gatech.box.com/v/gtmakery2-02",
-        video: "",
+        video: "youtu.be/NDmTO2ucPHc",
         code: "github.com/gtmakery/Workshops/tree/master/2021-Spring/2-Valentines_Acrylic_LED_Display",
         files: "gatech.box.com/v/gtmakery2-2files",
         redirects: ["slides", "video", "code", "files"],
         flyer: "feb2",
+        hasRental: true
+      },
+      feb16: {
+        semester: "spring21",
+        dateString: "feb16",
+        date: "2/16",
+        fullDate: new Date(2021, 1, 16),
+        title: "Moth Bot",
+        description: "Build a car that follows the light!",
+        software: ["arduino", "tinkercad"],
+        concepts: ["Arduino", "Motors", "L293D (H-Bridge)", "Photoresistors", "Kit car"],
+        slides: "gatech.box.com/v/gtmakery2-16",
+        video: "",
+        code: "github.com/gtmakery/Workshops/tree/master/2021-Spring/3-Moth_Bot",
+        redirects: ["slides", "video", "code"],
+        flyer: "feb16",
         hasRental: true
       }
     }

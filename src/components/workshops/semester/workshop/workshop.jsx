@@ -45,9 +45,9 @@ function Workshop({ semester, dateString }) {
       <div className="w-full h-fit flex flex-row flex-wrap p-2 justify-around">
         { workshopData.flyer && (
           !!fullWorkshopMatch
-            ? <img src={require(`assets/images/flyers/${workshopData.flyer}.png`).default} alt="workshop flyer" className="w-11/12 md:w-5/12 max-h-124 object-contain object-center"/>
+            ? <img src={require(`assets/images/flyers/${workshopData.flyer}.png`).default} alt="workshop flyer" width="1000" height="2000" className="w-11/12 md:w-5/12 max-h-124 object-contain object-center"/>
             : <Link key={dateString} to={`/workshops/${semester}/${dateString}`} className="w-11/12 md:w-5/12">
-                <img src={require(`assets/images/flyers/${workshopData.flyer}.png`).default} alt="workshop flyer" className="w-full h-full max-h-124 object-contain object-center"/>
+                <img src={require(`assets/images/flyers/${workshopData.flyer}.png`).default} alt="workshop flyer" width="1000" height="2000" className="w-full h-full max-h-124 object-contain object-center"/>
               </Link>
         )}
         <div className="w-11/12 md:w-1/2 h-full p-3 flex flex-col justify-between">

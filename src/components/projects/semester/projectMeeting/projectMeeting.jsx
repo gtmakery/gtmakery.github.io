@@ -15,8 +15,8 @@ function ProjectMeeting({ semester, dateString }) {
   const projectMeetingData = PROJECT_MEETINGS[semester].projectMeetings[dateString];
   const isLatest = latestProjectMeeting === projectMeetingData;
   const dayAfter = new Date(projectMeetingData.fullDate);
-  dayAfter.setDate(dayAfter.getDate() + 1);
-  dayAfter.setHours(0,0,0,0);
+  dayAfter.setDate(dayAfter.getDate());
+  dayAfter.setHours(12,0,0,0);
   const isPast = Date.now() > dayAfter.getTime();
 
   const fullProjectMeetingMatch = useRouteMatch({
@@ -49,7 +49,7 @@ function ProjectMeeting({ semester, dateString }) {
           </h1>
       }
       { !!projectMeetingData.mainProjectFocus && !!projectMeetingData.mainProjectFocus.length && projectMeetingData.mainProjectFocus in PROJECTS &&
-        <Link className="text-2xl font-semibold" to={`/projects/${projectMeetingData.mainProjectFocus}?fromSem=${semester}&fromDate=${dateString}`}>
+        <Link className="text-2xl font-semibold mt-1" to={`/projects/${projectMeetingData.mainProjectFocus}${!!fullProjectMeetingMatch ? `?fromSem=${semester}&fromDate=${dateString}` : ""}`}>
           {`More info on ${PROJECTS[projectMeetingData.mainProjectFocus].title}`}
         </Link>
       }
@@ -58,8 +58,8 @@ function ProjectMeeting({ semester, dateString }) {
           { !!projectMeetingData.redirects && projectMeetingData.redirects.filter(redirKey => projectMeetingData[redirKey] && (!projectMeetingData.offLimits || !projectMeetingData.offLimits.includes(redirKey))).map(redirKey => {
             return <div className="">
               <Link to={{ pathname: `https://${projectMeetingData[redirKey]}` }} target="_blank" className="underline flex flex-row items-center">
-                <p className="text-lg font-bold mr-2">{ redirectionDataMapping[redirKey].title || upperFirstChar(redirKey) }</p>
-                { redirectionDataMapping[redirKey] && redirectionDataMapping[redirKey].icon &&
+                <p className="text-lg font-bold mr-2">{ redirectionDataMapping[redirKey]?.title || upperFirstChar(redirKey) }</p>
+                { redirectionDataMapping[redirKey]?.icon &&
                   <FontAwesomeIcon icon={redirectionDataMapping[redirKey].icon} size="lg" />
                 }
               </Link>
@@ -73,10 +73,10 @@ function ProjectMeeting({ semester, dateString }) {
               </>
             )
             : <>
-              <h2 className="text-2xl font-bold">Meeting Notes:</h2>
+              <h2 className="text-2xl font-bold">Summary:</h2>
               <BulletList bullets={projectMeetingData.minutes} />
             </>
-        )}
+          )}
           <div className="flex-grow-0.5" />
         </div>
       </div>

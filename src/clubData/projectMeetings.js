@@ -21,11 +21,10 @@ const PROJECT_MEETINGS = {
         date: "2/11",
         fullDate: new Date(2021, 1, 11),
         slides: "gatech.box.com/v/gtmakery2-11",
-        video: "",
-        files: "",
-        redirects: ["slides", "video", "files"],
+        notes: "gatech.box.com/v/projectnotes2-11",
+        redirects: ["slides", "notes"],
         offLimits: ["slides"],
-        mainProjectFocus: "",
+        mainProjectFocus: "robotArm",
         preMeetingBlurb: {
           text: "Hey everyone! We'd love for you to come up with some project ideas that we can discuss at the meeting.",
           bullets: [
@@ -52,7 +51,30 @@ const PROJECT_MEETINGS = {
           ]
         },
         minutes: [
-          "None yet!"
+          {
+            text: "Potential project ideas:",
+            bullets: [
+              {
+                text: "Paper airplane/Origami making machine"
+              },
+              {
+                text: "Robot arm from Ironman"
+              },
+              {
+                text: "Lime Karts"
+              },
+              {
+                text: "Swarm Robots"
+              },
+              {
+                text: "DIY CNC Mill"
+              },
+              {
+                text: "Mini-Mars Rover"
+              }
+            ]
+          },
+          "Final choice: Robot Arm"
         ],
       }
     }

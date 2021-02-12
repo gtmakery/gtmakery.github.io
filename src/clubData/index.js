@@ -21,6 +21,10 @@ const redirectionDataMapping = {
   files: {
     title: "Files",
     icon: ["far", "folder-open"]
+  },
+  notes: {
+    title: "Meeting Notes",
+    icon: ["far", "file"]
   }
 };
 

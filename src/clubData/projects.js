@@ -24,6 +24,20 @@ const PROJECTS = {
     data: {
 
     }
+  },
+  robotArm: {
+    title: "Robot Arm",
+    shortDesc: "A robot arm that can be controlled by hand gestures",
+    description: "",
+    start: "spring21",
+    finished: false,
+    code: "",
+    files: "",
+    redirects: ["code", "files"],
+    materials: [],
+    data: {
+
+    }
   }
 };
 

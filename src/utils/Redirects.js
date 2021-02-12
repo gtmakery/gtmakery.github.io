@@ -75,7 +75,7 @@ const REDIRECTS = {
     software: true
   },
   tinkercad: {
-    aliases: ["tinker"],
+    aliases: ["tinker", "tinker-cad"],
     longName: "TinkerCAD",
     path: "tinkercad.com",
     software: true
@@ -84,6 +84,12 @@ const REDIRECTS = {
     aliases: ["fusion"],
     longName: "Fusion 360",
     path: "autodesk.com/education/edu-software/overview#",
+    software: true
+  },
+  arduino: {
+    aliases: ["arduino-ide"],
+    longName: "Arduino IDE",
+    path: "arduino.cc/en/software#",
     software: true
   }
 };
