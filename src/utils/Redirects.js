@@ -91,6 +91,17 @@ const REDIRECTS = {
     longName: "Arduino IDE",
     path: "arduino.cc/en/software#",
     software: true
+  },
+  putty: {
+    longName: "PuTTY",
+    path: "putty.org",
+    software: true
+  },
+  etcher: {
+    aliases: ["balena-etcher"],
+    longName: "Balena Etcher",
+    path: "etcher.io",
+    software: true
   }
 };
 

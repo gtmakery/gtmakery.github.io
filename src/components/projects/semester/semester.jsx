@@ -34,7 +34,7 @@ function Semester({ semester }) {
             Back to all projects
           </p>
         </Link> }
-        <div className="w-full h-fill flex flex-row flex-wrap justify-evenly">
+        <div className="w-full h-fill flex flex-col flex-wrap justify-evenly">
           {Object.entries(PROJECT_MEETINGS[semester].projectMeetings).map(([dateString, data]) => {
             /* Extremely hacky code below
              * require(`assets/images/flyers/${data.flyer}.png`).default

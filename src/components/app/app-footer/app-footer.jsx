@@ -8,7 +8,7 @@ export default function AppFooter() {
           <p className="text-yellow-400 text-center block sm:hidden">GT CoC - The Makery</p>
           <p className="text-yellow-400 text-center hidden sm:block md:hidden">Georgia Tech College Of Computing - The Makery</p>
           <p className="text-yellow-400 text-center hidden md:block lg:hidden">Georgia Tech College Of Computing - The Makery - Inspiring makers, one at a time</p>
-          <p className="text-yellow-400 text-center hidden lg:block">Georgia Tech College Of Computing - The Makery - Inspiring makers, one at a time. Updated Feb 5, 2021.</p>
+          <p className="text-yellow-400 text-center hidden lg:block">Georgia Tech College Of Computing - The Makery - Inspiring makers, one at a time. Updated Feb 23, 2021.</p>
         </div>
       </footer>
     );

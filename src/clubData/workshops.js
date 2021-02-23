@@ -59,20 +59,45 @@ const WORKSHOPS = {
         software: ["arduino", "tinkercad"],
         concepts: ["Arduino", "Motors", "L293D (H-Bridge)", "Photoresistors", "Kit car"],
         slides: "gatech.box.com/v/gtmakery2-16",
-        video: "",
+        video: "youtu.be/tHsXpMAmVu0",
         code: "github.com/gtmakery/Workshops/tree/master/2021-Spring/3-Moth_Bot",
         redirects: ["slides", "video", "code"],
         flyer: "feb16",
         hasRental: true
+      },
+      mar2: {
+        semester: "spring21",
+        dateString: "mar2",
+        date: "3/2",
+        fullDate: new Date(2021, 2, 2),
+        title: "Pi Day",
+        description: "Control an LED matrix with a Raspberry Pi!",
+        software: ["etcher", "putty"],
+        concepts: ["Raspberry Pi", "SSH", "Python3", "LEDs", "NeoPixel", "NeoPixel Matrix",],
+        slides: "gatech.box.com/v/gtmakery3-02",
+        video: "",
+        // code: "github.com/gtmakery/Workshops/tree/master/2021-Spring/4-Pi_Day",
+        redirects: ["slides", "video", "code"],
+        flyer: "mar2",
       }
     }
   }
 };
 
-const latestWorkshop = Object.values(Object.values(WORKSHOPS).slice(-1)[0].workshops).slice(-1)[0];
+const allWorkshops = Object.values(WORKSHOPS).map(semester => Object.values(semester.workshops)).flat().sort((meeting1,meeting2) => meeting1.fullDate.getTime()-meeting2.fullDate.getTime());
+
+const upcomingWorkshops = allWorkshops.filter(meeting => {
+  const dayAfter = new Date(meeting.fullDate);
+  dayAfter.setDate(dayAfter.getDate());
+  dayAfter.setHours(12,0,0,0);
+  return Date.now() <= dayAfter.getTime();
+});
+
+const nextWorkshop = upcomingWorkshops[0];
+const latestWorkshop = upcomingWorkshops.slice(-1)[0];
 
 const byAlias = (alias) => {
-  return Object.values(WORKSHOPS).map(semester => semester.workshops).reduce((allWorkshops, workshopSetObject) => allWorkshops.concat(Object.values(workshopSetObject)), []).find(workshop =>
+  return allWorkshops.find(workshop =>
     alias === workshop.semester + workshop.dateString
         || alias === workshop.dateString
         || alias === workshop.date
@@ -84,4 +109,4 @@ const byAlias = (alias) => {
 };
 
 export default WORKSHOPS;
-export { latestWorkshop, byAlias };
+export { upcomingWorkshops, nextWorkshop, latestWorkshop, byAlias };

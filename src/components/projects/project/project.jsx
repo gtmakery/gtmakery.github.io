@@ -13,7 +13,7 @@ import { upperFirstChar } from 'utils';
 
 function Project({ projectName }) {
   const projectData = PROJECTS[projectName];
-  const isOngoing = !projectData.finished;
+  // const isOngoing = !projectData.finished;
 
   const fullProjectMatch = useRouteMatch({
     path: `/projects/${projectName}`

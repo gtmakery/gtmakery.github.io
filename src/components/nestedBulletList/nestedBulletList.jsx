@@ -4,7 +4,7 @@ import React from 'react';
 const NestedBulletList = ({bullets}) => {
   return (!bullets || !bullets.length) ? (null) : <ul className="pl-3">
     { !!bullets && !!bullets.length && bullets.map(bullet => {
-      return <BulletItem key={bullet} item={bullet} />
+      return <BulletItem key={bullet.text || bullet.string || bullet} item={bullet} />
     })}
   </ul>
 };

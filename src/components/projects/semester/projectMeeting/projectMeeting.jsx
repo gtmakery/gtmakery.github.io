@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ExternalRedirect from 'components/externalRedirect';
 import BulletList from 'components/nestedBulletList';
 
-import PROJECT_MEETINGS, { latestProjectMeeting } from 'clubData/projectMeetings';
+import PROJECT_MEETINGS, { /*latestProjectMeeting*/ } from 'clubData/projectMeetings';
 import PROJECTS from 'clubData/projects';
 import { redirectionDataMapping } from 'clubData';
 import { upperFirstChar } from 'utils';
@@ -13,7 +13,7 @@ import { upperFirstChar } from 'utils';
 function ProjectMeeting({ semester, dateString }) {
   const semesterData = PROJECT_MEETINGS[semester];
   const projectMeetingData = PROJECT_MEETINGS[semester].projectMeetings[dateString];
-  const isLatest = latestProjectMeeting === projectMeetingData;
+  // const isLatest = latestProjectMeeting === projectMeetingData;
   const dayAfter = new Date(projectMeetingData.fullDate);
   dayAfter.setDate(dayAfter.getDate());
   dayAfter.setHours(12,0,0,0);
@@ -56,7 +56,7 @@ function ProjectMeeting({ semester, dateString }) {
       <div className="w-full h-fit flex flex-row flex-wrap p-2 justify-around">
         <div className="w-11/12 h-full p-3 flex flex-col justify-between">
           { !!projectMeetingData.redirects && projectMeetingData.redirects.filter(redirKey => projectMeetingData[redirKey] && (!projectMeetingData.offLimits || !projectMeetingData.offLimits.includes(redirKey))).map(redirKey => {
-            return <div className="">
+            return <div key={redirKey} className="">
               <Link to={{ pathname: `https://${projectMeetingData[redirKey]}` }} target="_blank" className="underline flex flex-row items-center">
                 <p className="text-lg font-bold mr-2">{ redirectionDataMapping[redirKey]?.title || upperFirstChar(redirKey) }</p>
                 { redirectionDataMapping[redirKey]?.icon &&
@@ -65,18 +65,16 @@ function ProjectMeeting({ semester, dateString }) {
               </Link>
             </div>
           })}
-          { !!projectMeetingData.minutes && !!projectMeetingData.minutes.length && (!isPast
-            ? (
-              !!projectMeetingData.preMeetingBlurb && <>
+          {!isPast
+            ? ( !!projectMeetingData.preMeetingBlurb && <>
                 <p className="text-xl">{projectMeetingData.preMeetingBlurb.text || projectMeetingData.preMeetingBlurb}</p>
                 { projectMeetingData.preMeetingBlurb.bullets && <BulletList bullets={projectMeetingData.preMeetingBlurb.bullets} /> }
-              </>
-            )
-            : <>
+              </> )
+            : ( !!projectMeetingData.minutes && !!projectMeetingData.minutes.length && <>
               <h2 className="text-2xl font-bold">Summary:</h2>
               <BulletList bullets={projectMeetingData.minutes} />
-            </>
-          )}
+            </> )
+          }
           <div className="flex-grow-0.5" />
         </div>
       </div>

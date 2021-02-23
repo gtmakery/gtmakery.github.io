@@ -76,15 +76,73 @@ const PROJECT_MEETINGS = {
           },
           "Final choice: Robot Arm"
         ],
+      },
+      feb19: {
+        semester: "spring21",
+        dateString: "feb19",
+        date: "2/19",
+        fullDate: new Date(2021, 1, 19),
+        notes: "gatech.box.com/v/projectnotes2-19",
+        redirects: ["notes"],
+        mainProjectFocus: "robotArm",
+        minutes: [
+          "Development platform: ROS 2",
+          {
+            text: "Gesture Recognition",
+            bullets: [
+              {
+                text: "Camera: Realsense Depth Camera D415"
+              },
+              {
+                text: "Gestures",
+                bullets: [
+                  "Swiping up/down/left/right",
+                  "Push forward/backward",
+                  "Grabbing",
+                  "High five"
+                ]
+              }
+            ]
+          },
+        ],
+      },
+      feb25: {
+        semester: "spring21",
+        dateString: "feb25",
+        date: "2/25",
+        fullDate: new Date(2021, 1, 25),
+        notes: "gatech.box.com/v/projectnotes2-25",
+        redirects: ["notes"],
+        offLimits: ["notes"],
+        mainProjectFocus: "robotArm",
+        preMeetingBlurb: {
+          text: "We'll be working on the mechanics/building of the Robot Arm",
+          bullets: [
+            "Research ROS2 if you'd like"
+          ]
+        },
+        minutes: [
+
+        ],
       }
     }
   }
 };
 
-const latestProjectMeeting = Object.values(Object.values(PROJECT_MEETINGS)[0].projectMeetings).slice(-1)[0];
+const allProjectMeetings = Object.values(PROJECT_MEETINGS).map(semester => Object.values(semester.projectMeetings)).flat().sort((meeting1,meeting2) => meeting1.fullDate.getTime()-meeting2.fullDate.getTime());
+
+const upcomingProjectMeetings = allProjectMeetings.filter(meeting => {
+  const dayAfter = new Date(meeting.fullDate);
+  dayAfter.setDate(dayAfter.getDate());
+  dayAfter.setHours(12,0,0,0);
+  return Date.now() <= dayAfter.getTime();
+});
+
+const nextProjectMeeting = upcomingProjectMeetings[0];
+const latestProjectMeeting = upcomingProjectMeetings.slice(-1)[0];
 
 const byAlias = (alias) => {
-  return Object.values(PROJECT_MEETINGS).map(semester => semester.projectMeetings).reduce((allProjectMeetings, projectMeetingSetObject) => allProjectMeetings.concat(Object.values(projectMeetingSetObject)), []).find(projectMeeting =>
+  return allProjectMeetings.find(projectMeeting =>
     alias === projectMeeting.semester + projectMeeting.dateString
         || alias === projectMeeting.dateString
         || alias === projectMeeting.date
@@ -93,4 +151,4 @@ const byAlias = (alias) => {
 }
 
 export default PROJECT_MEETINGS;
-export { latestProjectMeeting, byAlias };
+export { upcomingProjectMeetings, nextProjectMeeting, latestProjectMeeting, byAlias };

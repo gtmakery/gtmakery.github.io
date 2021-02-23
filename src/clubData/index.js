@@ -1,9 +1,13 @@
-import WORKSHOPS, { latestWorkshop, byAlias as workshopByAlias } from './workshops';
-import PROJECT_MEETINGS, { latestProjectMeeting, byAlias as projectMeetingByAlias } from './projectMeetings';
+import WORKSHOPS, { upcomingWorkshops, nextWorkshop, latestWorkshop, byAlias as workshopByAlias } from './workshops';
+import PROJECT_MEETINGS, { upcomingProjectMeetings, nextProjectMeeting, latestProjectMeeting, byAlias as projectMeetingByAlias } from './projectMeetings';
 
 
 const latestMeeting = latestWorkshop.fullDate.getTime() >= latestProjectMeeting.fullDate.getTime() ? latestWorkshop : latestProjectMeeting;
 latestMeeting.type = latestWorkshop.fullDate.getTime() >= latestProjectMeeting.fullDate.getTime() ? "WORKSHOP" : "PROJECT_MEETING";
+
+const nextMeeting = nextWorkshop.fullDate.getTime() <= nextProjectMeeting.fullDate.getTime() ? nextWorkshop : nextProjectMeeting;
+nextMeeting.type = nextWorkshop.fullDate.getTime() <= nextProjectMeeting.fullDate.getTime() ? "WORKSHOP" : "PROJECT_MEETING";
+
 
 const redirectionDataMapping = {
   slides: {
@@ -29,7 +33,7 @@ const redirectionDataMapping = {
 };
 
 export {
-  WORKSHOPS, latestWorkshop, workshopByAlias,
-  PROJECT_MEETINGS, latestProjectMeeting, projectMeetingByAlias
+  WORKSHOPS, upcomingWorkshops, nextWorkshop, latestWorkshop, workshopByAlias,
+  PROJECT_MEETINGS, upcomingProjectMeetings, nextProjectMeeting, latestProjectMeeting, projectMeetingByAlias
 };
-export { latestMeeting, redirectionDataMapping };
+export { latestMeeting, nextMeeting, redirectionDataMapping };

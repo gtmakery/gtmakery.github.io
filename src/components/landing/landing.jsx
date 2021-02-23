@@ -5,12 +5,12 @@ import Workshop from 'components/workshops/semester/workshop';
 import ProjectMeeting from 'components/projects/semester/projectMeeting';
 import SchedulePic from 'assets/images/spring21schedule.png';
 
-import { latestWorkshop, latestProjectMeeting, latestMeeting } from 'clubData';
+import { nextWorkshop, nextProjectMeeting, nextMeeting } from 'clubData';
 
-const LatestMeetingType = latestWorkshop === latestMeeting ? Workshop : ProjectMeeting;
+const NextMeetingType = nextWorkshop === nextMeeting ? Workshop : ProjectMeeting;
 
-const secondaryMeeting = latestWorkshop !== latestMeeting ? latestWorkshop : latestProjectMeeting;
-const SecondaryMeetingType = latestWorkshop !== latestMeeting ? Workshop : ProjectMeeting;
+const secondaryMeeting = nextWorkshop !== nextMeeting ? nextWorkshop : nextProjectMeeting;
+const SecondaryMeetingType = nextWorkshop !== nextMeeting ? Workshop : ProjectMeeting;
 
 function Landing() {
   return (
@@ -21,7 +21,7 @@ function Landing() {
         <p className="">Our mission is to enable individuals to prototype, build, and program their own electronic devices, be it as simple as a flashing LED sign or as complicated as a solar powered surveillance blimp. We provide support for aspiring makers to develop ideas by providing the necessary knowledge and equipment.</p>
       </div>
       <div className="w-full flex flex-col items-center">
-        <LatestMeetingType semester={latestMeeting.semester} dateString={latestMeeting.dateString} />
+        <NextMeetingType semester={nextMeeting.semester} dateString={nextMeeting.dateString} />
       </div>
       <div className="w-full flex flex-col items-center">
         <SecondaryMeetingType semester={secondaryMeeting.semester} dateString={secondaryMeeting.dateString} />

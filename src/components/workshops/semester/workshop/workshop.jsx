@@ -63,7 +63,7 @@ function Workshop({ semester, dateString }) {
               {workshopData.software.map(softwareLinkName => {
                 const softwareLinkData = softwareRedirects[softwareLinkName];
                 if (!softwareLinkData) {
-                  return <p className="text-red-500">oops! contact gtmakery@gmail.com to fix this</p>
+                  return <p key={softwareLinkName} className="text-red-500">oops! contact gtmakery@gmail.com to fix this</p>
                 }
                 return <li key={softwareLinkName} className={`${softwareLinkData.color} text-base`}>
                   <Link to={{ pathname: `https://${softwareLinkData.path}` }} target="_blank" className="underline flex flex-row items-center w-fit">
@@ -85,7 +85,7 @@ function Workshop({ semester, dateString }) {
             </ul>
           </div> }
           { !!workshopData.redirects && workshopData.redirects.filter(redirKey => workshopData[redirKey]).map(redirKey => {
-            return <div className="">
+            return <div key={redirKey} className="">
               <Link to={{ pathname: `https://${workshopData[redirKey]}` }} target="_blank" className="underline flex flex-row items-center">
                 <p className="text-lg font-bold mr-2">{ redirectionDataMapping[redirKey].title || upperFirstChar(redirKey) }</p>
                 { redirectionDataMapping[redirKey] && redirectionDataMapping[redirKey].icon &&
