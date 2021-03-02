@@ -72,11 +72,11 @@ const WORKSHOPS = {
         fullDate: new Date(2021, 2, 2),
         title: "Pi Day",
         description: "Control an LED matrix with a Raspberry Pi!",
-        software: ["etcher", "putty"],
+        software: ["etcher", "putty", "ngrok"],
         concepts: ["Raspberry Pi", "SSH", "Python3", "LEDs", "NeoPixel", "NeoPixel Matrix",],
         slides: "gatech.box.com/v/gtmakery3-02",
         video: "",
-        // code: "github.com/gtmakery/Workshops/tree/master/2021-Spring/4-Pi_Day",
+        code: "github.com/gtmakery/Workshops/tree/master/2021-Spring/4-Pi_Day",
         redirects: ["slides", "video", "code"],
         flyer: "mar2",
       }
@@ -85,6 +85,7 @@ const WORKSHOPS = {
 };
 
 const allWorkshops = Object.values(WORKSHOPS).map(semester => Object.values(semester.workshops)).flat().sort((meeting1,meeting2) => meeting1.fullDate.getTime()-meeting2.fullDate.getTime());
+allWorkshops.forEach(workshop => workshop.type = "WORKSHOP");
 
 const upcomingWorkshops = allWorkshops.filter(meeting => {
   const dayAfter = new Date(meeting.fullDate);
@@ -94,7 +95,10 @@ const upcomingWorkshops = allWorkshops.filter(meeting => {
 });
 
 const nextWorkshop = upcomingWorkshops[0];
-const latestWorkshop = upcomingWorkshops.slice(-1)[0];
+const latestWorkshop = upcomingWorkshops.slice(-1)[0] || allWorkshops.slice(-1)[0];
+
+// !nextWorkshop && (nextWorkshop = );
+// !latestWorkshop && (latestWorkshop = allWorkshops.slice(-1)[0]);
 
 const byAlias = (alias) => {
   return allWorkshops.find(workshop =>
@@ -109,4 +113,4 @@ const byAlias = (alias) => {
 };
 
 export default WORKSHOPS;
-export { upcomingWorkshops, nextWorkshop, latestWorkshop, byAlias };
+export { allWorkshops, upcomingWorkshops, nextWorkshop, latestWorkshop, byAlias };

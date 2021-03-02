@@ -5,12 +5,11 @@ import Workshop from 'components/workshops/semester/workshop';
 import ProjectMeeting from 'components/projects/semester/projectMeeting';
 import SchedulePic from 'assets/images/spring21schedule.png';
 
-import { nextWorkshop, nextProjectMeeting, nextMeeting } from 'clubData';
+import { nextMeeting, latestMeeting } from 'clubData';
 
-const NextMeetingType = nextWorkshop === nextMeeting ? Workshop : ProjectMeeting;
+const NextMeetingType = nextMeeting.type === "WORKSHOP" ? Workshop : ProjectMeeting;
 
-const secondaryMeeting = nextWorkshop !== nextMeeting ? nextWorkshop : nextProjectMeeting;
-const SecondaryMeetingType = nextWorkshop !== nextMeeting ? Workshop : ProjectMeeting;
+const LatestMeetingType = latestMeeting.type === "WORKSHOP" ? Workshop : ProjectMeeting;
 
 function Landing() {
   return (
@@ -24,7 +23,7 @@ function Landing() {
         <NextMeetingType semester={nextMeeting.semester} dateString={nextMeeting.dateString} />
       </div>
       <div className="w-full flex flex-col items-center">
-        <SecondaryMeetingType semester={secondaryMeeting.semester} dateString={secondaryMeeting.dateString} />
+        <LatestMeetingType semester={latestMeeting.semester} dateString={latestMeeting.dateString} />
       </div>
       <div className="w-full flex flex-col items-center">
         <h2 className="text-4xl font-bold text-center text-black mb-3">Schedule</h2>

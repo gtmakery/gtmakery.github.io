@@ -46,7 +46,7 @@ export default function App(props) {
             <Projects />
           </Route>
           <Route path='/upcoming'>
-            <Redirect to={`${nextMeeting.type === "WORKSHOP" ? "workshops" : "projects"}/${nextMeeting.semester}/${nextMeeting.dateString}`} />
+            <Redirect to={!!nextMeeting ? `${nextMeeting.type === "WORKSHOP" ? "workshops" : "projects"}/${nextMeeting.semester}/${nextMeeting.dateString}` : `/`} />
           </Route>
           {Object.entries(REDIRECTS).map(([shortName, data]) => {
             const pathNames = [shortName].concat(data.aliases || []).map(path => '/'+path);

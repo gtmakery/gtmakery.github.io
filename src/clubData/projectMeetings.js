@@ -130,6 +130,7 @@ const PROJECT_MEETINGS = {
 };
 
 const allProjectMeetings = Object.values(PROJECT_MEETINGS).map(semester => Object.values(semester.projectMeetings)).flat().sort((meeting1,meeting2) => meeting1.fullDate.getTime()-meeting2.fullDate.getTime());
+allProjectMeetings.forEach(meeting => meeting.type = "PROJECT_MEETING");
 
 const upcomingProjectMeetings = allProjectMeetings.filter(meeting => {
   const dayAfter = new Date(meeting.fullDate);
@@ -139,7 +140,7 @@ const upcomingProjectMeetings = allProjectMeetings.filter(meeting => {
 });
 
 const nextProjectMeeting = upcomingProjectMeetings[0];
-const latestProjectMeeting = upcomingProjectMeetings.slice(-1)[0];
+const latestProjectMeeting = upcomingProjectMeetings.slice(-1)[0] || allProjectMeetings.slice(-1)[0];
 
 const byAlias = (alias) => {
   return allProjectMeetings.find(projectMeeting =>
@@ -151,4 +152,4 @@ const byAlias = (alias) => {
 }
 
 export default PROJECT_MEETINGS;
-export { upcomingProjectMeetings, nextProjectMeeting, latestProjectMeeting, byAlias };
+export { allProjectMeetings, upcomingProjectMeetings, nextProjectMeeting, latestProjectMeeting, byAlias };

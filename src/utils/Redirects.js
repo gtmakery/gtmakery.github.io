@@ -102,6 +102,11 @@ const REDIRECTS = {
     longName: "Balena Etcher",
     path: "etcher.io",
     software: true
+  },
+  ngrok: {
+    longName: "ngrok",
+    path: "ngrok.com",
+    software: true
   }
 };
 

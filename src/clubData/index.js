@@ -1,13 +1,20 @@
-import WORKSHOPS, { upcomingWorkshops, nextWorkshop, latestWorkshop, byAlias as workshopByAlias } from './workshops';
-import PROJECT_MEETINGS, { upcomingProjectMeetings, nextProjectMeeting, latestProjectMeeting, byAlias as projectMeetingByAlias } from './projectMeetings';
+import WORKSHOPS, { allWorkshops, upcomingWorkshops, nextWorkshop, latestWorkshop, byAlias as workshopByAlias } from './workshops';
+import PROJECT_MEETINGS, { allProjectMeetings, upcomingProjectMeetings, nextProjectMeeting, latestProjectMeeting, byAlias as projectMeetingByAlias } from './projectMeetings';
 
+const allMeetings = [...allWorkshops, ...allProjectMeetings].sort((meeting1,meeting2) => meeting1.fullDate.getTime()-meeting2.fullDate.getTime());
 
-const latestMeeting = latestWorkshop.fullDate.getTime() >= latestProjectMeeting.fullDate.getTime() ? latestWorkshop : latestProjectMeeting;
-latestMeeting.type = latestWorkshop.fullDate.getTime() >= latestProjectMeeting.fullDate.getTime() ? "WORKSHOP" : "PROJECT_MEETING";
+const upcomingMeetings = allMeetings.filter(meeting => {
+  const dayAfter = new Date(meeting.fullDate);
+  dayAfter.setDate(dayAfter.getDate());
+  dayAfter.setHours(12,0,0,0);
+  return Date.now() <= dayAfter.getTime();
+});
 
-const nextMeeting = nextWorkshop.fullDate.getTime() <= nextProjectMeeting.fullDate.getTime() ? nextWorkshop : nextProjectMeeting;
-nextMeeting.type = nextWorkshop.fullDate.getTime() <= nextProjectMeeting.fullDate.getTime() ? "WORKSHOP" : "PROJECT_MEETING";
+const nextMeeting = upcomingMeetings[0];
 
+let latestIndex = -1;
+let latestMeeting = allMeetings.slice(latestIndex)[0];
+while (latestMeeting === nextMeeting) latestMeeting = allMeetings.slice(--latestIndex)[0];
 
 const redirectionDataMapping = {
   slides: {
