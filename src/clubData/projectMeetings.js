@@ -122,7 +122,11 @@ const PROJECT_MEETINGS = {
           ]
         },
         minutes: [
-
+          {
+            text: "We will be using ROS2 as a development platform for the robot",
+            bullets: ["https://index.ros.org/doc/ros2/"]
+          },
+          "We worked on setting up the ROS2 dev environment on each of our machines."
         ],
       }
     }
