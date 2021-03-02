@@ -7,7 +7,7 @@ import SchedulePic from 'assets/images/spring21schedule.png';
 
 import { nextMeeting, latestMeeting } from 'clubData';
 
-const NextMeetingType = nextMeeting.type === "WORKSHOP" ? Workshop : ProjectMeeting;
+const NextMeetingType = !nextMeeting ? undefined : nextMeeting.type === "WORKSHOP" ? Workshop : ProjectMeeting;
 
 const LatestMeetingType = latestMeeting.type === "WORKSHOP" ? Workshop : ProjectMeeting;
 
@@ -19,9 +19,9 @@ function Landing() {
         <p className="">The Makery is a Georgia Tech student organization dedicated to embedded systems. We teach all things from basic Ardiuno concepts to Raspberry Pi web hosting and even 3D-printing/laser-cutting!</p>
         <p className="">Our mission is to enable individuals to prototype, build, and program their own electronic devices, be it as simple as a flashing LED sign or as complicated as a solar powered surveillance blimp. We provide support for aspiring makers to develop ideas by providing the necessary knowledge and equipment.</p>
       </div>
-      <div className="w-full flex flex-col items-center">
+      { !!nextMeeting && <div className="w-full flex flex-col items-center">
         <NextMeetingType semester={nextMeeting.semester} dateString={nextMeeting.dateString} />
-      </div>
+      </div> }
       <div className="w-full flex flex-col items-center">
         <LatestMeetingType semester={latestMeeting.semester} dateString={latestMeeting.dateString} />
       </div>
